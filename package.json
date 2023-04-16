@@ -1,7 +1,29 @@
 {
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "MySQL nodejs CLI app",
+  "main": "index.js",
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^8.2.4",
-    "mysql2": "^3.2.1"
-  }
+    "mysql2": "^3.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-vanhoose/Employee-Tracker.git"
+  },
+  "keywords": [
+    "Node",
+    "mysql2",
+    "inquirer"
+  ],
+  "author": "Brett VanHoose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-vanhoose/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/m-vanhoose/Employee-Tracker#readme"
 }

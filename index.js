@@ -8,8 +8,8 @@ const db = mysql.createConnection({
     user: "root",
     password: process.env.password,
     database: "Horiseon_db",
-
-})
+},
+console.log('Connected to Horiseon Database.'))
 
 db.connect(function(err){
 if(err) throw err;
@@ -56,7 +56,7 @@ function displayMenu(){
 }
 
 function getDepartments() {
-    db.query("select * from department;", function(err,data) {
+    db.query("SELECT * from department;", function(err,data) {
         if(err) throw err
         console.table(data)
         displayMenu()
@@ -64,7 +64,7 @@ function getDepartments() {
 }
 
 function getRoles() {
-    db.query("select * from role;", function(err,data) {
+    db.query("SELECT * from role;", function(err,data) {
         if(err) throw err
         console.table(data)
         displayMenu()
@@ -72,9 +72,41 @@ function getRoles() {
 }
 
 function getEmployees() {
-    db.query("select * from employee;", function(err,data) {
+    db.query("SELECT * from employee;", function(err, data) {
         if(err) throw err
         console.table(data)
         displayMenu()
     })
 }
+
+function addDepartment() {
+    inquirer.prompt([
+        {
+            name: 'newDepartment',
+            type: 'input',
+            message: `What is the new department's name?`
+        }
+    ]).then((response) => {
+        db.query(`INSERT INTO department SET ?`,
+        {
+            name: response.newDepartment,
+        },
+        (err, res) => {
+            if (err) throw err;
+            console.log(`\n ${response.newDept} successfully added to database! \n`);
+            displayMenu();
+        })
+    })
+}
+
+function addRole() {
+    
+}
+
+// function addEmployee() {
+    
+// }
+
+// function updateRole() {
+    
+// }

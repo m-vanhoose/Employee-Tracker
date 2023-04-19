@@ -93,20 +93,101 @@ function addDepartment() {
         },
         (err, res) => {
             if (err) throw err;
-            console.log(`\n ${response.newDept} successfully added to database! \n`);
+            console.log(`\n ${response.newDepartment} successfully added to database! \n`);
             displayMenu();
         })
     })
 }
 
 function addRole() {
-    
+    inquirer.prompt([
+        {
+            name: 'newRole',
+            type: 'input',
+            message: `What is the new role title?`
+        },
+        {
+            name: 'newSalary',
+            type: 'input',
+            message: `what is the new role's salary?`
+        },
+        {
+            name: 'newRoleDepartment',
+            type: 'input',
+            message: `What department id does this role belong to?`
+        }
+    ]).then((response) => {
+        db.query(`INSERT INTO role SET ?`,
+        {
+            title: response.newRole,
+            salary: response.newSalary,
+            department_id: response.newRoleDepartment,
+        },
+        (err, res) => {
+            if (err) throw err;
+            console.log(`\n ${response.newRole} successfully added to database! \n`);
+            displayMenu();
+        })
+    })
 }
 
-// function addEmployee() {
-    
-// }
+function addEmployee() {
+    inquirer.prompt([
+        {
+            name: 'firstName',
+            type: 'input',
+            message: `What is the new employee's first name?`
+        },
+        {
+            name: 'lastName',
+            type: 'input',
+            message: `What is the new employee's last name?`
+        },
+        {
+            name: 'employeeRole',
+            type: 'input',
+            message: `What is the new employee's role id?`
+        },
+        {
+            name: 'managerId',
+            type: 'input',
+            message: `What is the manager id for this new employee?`
+        }
+    ]).then((response) => {
+        db.query(`INSERT INTO employee SET ?`,
+        {
+           first_name: response.firstName,
+           last_name: response.lastName,
+           role_id: response.employeeRole,
+           manager_id: response.managerId,
+        },
+        (err, res) => {
+            if (err) throw err;
+            console.log(`\n ${response.firstName} has been successfully added to database! \n`);
+            displayMenu();
+        })
+    })
+}
 
-// function updateRole() {
-    
-// }
+function updateRole() {
+    inquirer.prompt([
+        {
+            name: `chooseEmployee`,
+            type: `list`,
+            message: `Choose an employee`,
+            choices: [`SELECT * FROM employee`],
+        },
+        {
+            name: `newRole`,
+            type: `list`,
+            message: `Choose a new role`,
+            choices: [`SELECT * FROM role`]
+        },
+    ]).then((response) => {
+        db.query(`UPDATE employee SET employee.role_id ? WHERE employee.id ?`,
+        {
+
+        },
+        )
+    })
+}
